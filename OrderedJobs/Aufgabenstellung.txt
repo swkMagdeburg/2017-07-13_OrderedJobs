@@ -1,0 +1,47 @@
+Class Kata „Ordered Jobs“
+
+Entwickle eine Klasse, die einen Plan zur Abarbeitung untereinander abhängiger Jobs erstellt [1].
+
+Jeder Job wird durch einen Buchstaben repräsentiert, z.B. „c“ oder „x“.
+
+Es kann sein, dass vor einem Job „a“ ein Job „u“ abgearbeitet werden muss. Dann ist „a“ von „u“ abhängig. Natürlich kann jeder Job von beliebig vielen anderen abhängig sein und die wiederum von anderen…
+
+Nachdem eine Reihe von Jobs mit ihren Abhängigkeiten registriert wurden, soll die Klasse sie in eine Abarbeitungsreihenfolge bringen, in der Abhängige nach denen dran sind, von denen sie abhängen.
+
+Das Interface dafür sieht so aus:
+
+interface IOrderedJobs {
+  void Register(char dependentJob, char independentJob);
+  void Register(char job);
+ 
+  string Sort();
+}
+
+Wenn damit wie folgt registriert wird…
+
+Register('c');
+Register('b', 'a');
+Register('c', 'b');
+
+…dann liefert Sort() dieses Ergebnis:
+
+"abc"
+
+Jobs, die in mehreren Registrierungen vorkommen, tauchen in der Sortierung nur einmal auf.
+
+Unabhängige Jobs können in beliebiger Reihenfolge in der Sortierung stehen, solange sie vor denen abgearbeitet werden, die von ihnen abhängig sind.
+
+Direkte oder indirekte zirkuläre Abhängigkeiten sollen über eine Exception gemeldet werden – spätestens bei der Sortierung.
+
+Variationen
+
+Implementiere eine alternative Funktion string Sort(string registrierungen), die Registrierungen in Form einer mehrzeiligen Zeichenkette folgender Form entgegennimmt [1]:
+
+
+c =>
+b => a
+c => b
+
+Ressourcen
+
+[1] The Ordered Jobs Kata, http://invalidcast.com/2011/09/the-ordered-jobs-kata
